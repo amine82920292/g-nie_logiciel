@@ -13,29 +13,34 @@ public class DossierBancaire {
 		_ce = new CompteEpargne();
 		_soldeDB = 0;
 	}
+
 //methode déposer
+	
 	public void deposer(double value) {
 
 		_cc.Deposer(value * 0.4);
 		_ce.Deposer(value * 0.6);
 		_soldeDB += value;
 	}
-	//methode getsolde
+	// methode getsolde
 
 	public double get_solde() {
 		return _soldeDB;
 	}
-	//methode remunurer 
+
+	// methode remunurer
 	public void remunerer() {
 		double gain = _ce.remunerer();
 		this.deposer(gain);
-	
+
 	}
-	//methode pour recuperer les informations du compte courant
+
+	// methode pour recuperer les informations du compte courant
 	public CompteCourant get_cc() {
 		return _cc;
 	}
-	//methode pour recuperer les informations du compte épargne
+
+	// methode pour recuperer les informations du compte épargne
 	public CompteEpargne get_ce() {
 		return _ce;
 	}
