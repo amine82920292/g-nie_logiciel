@@ -19,6 +19,14 @@ public class TestsDossierBancaire {
 	}
 
 	@Test
+	public void testdossierbancaire() {
+		DossierBancaire db = new DossierBancaire();
+		assertEquals(0,db.get_solde(),0.01);		
+		assertEquals(0,db.get_cc().get_solde(),0.01);
+		assertEquals(0,db.get_ce().get_solde(),0.01);
+	}
+	
+	@Test
 	public void testdeposer() {
 		
 		
@@ -39,9 +47,11 @@ public class TestsDossierBancaire {
 	}
 	@Test
 	public void testremunerer() {
-		DossierBancaire dossier=new DossierBancaire();
-		dossier.deposer(100);
-		assertEquals(100,dossier.get_solde(),0);
+		DossierBancaire db=new DossierBancaire();
+		db.deposer(1000);
+        db.remunerer();
+		assertEquals(1000+1000*0.6*0.032,db.get_solde(),0.01);
+		
 	}
 
 }

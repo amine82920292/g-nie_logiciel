@@ -7,8 +7,7 @@ import myPackage.CompteCourant;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestsDossierBancaire.class,
-	CompteCourant.class
-
+	TestsCompteCourant.class, TestsCompteEpargne.class
 })
 
 public class TestsSuite {
