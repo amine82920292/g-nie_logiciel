@@ -9,23 +9,19 @@ import org.junit.Test;
 import myPackage.DossierBancaire;
 
 public class TestsDossierBancaire {
-
 	@Before
 	public void setUp() throws Exception {	
 	}
-
 	@After
 	public void tearDown() throws Exception {
 	}
-
 	@Test
 	public void testdossierbancaire() {
 		DossierBancaire db = new DossierBancaire();
 		assertEquals(0,db.get_solde(),0.01);		
 		assertEquals(0,db.get_cc().get_solde(),0.01);
 		assertEquals(0,db.get_ce().get_solde(),0.01);
-	}
-	
+	}	
 	@Test
 	public void testdeposer() {
 		
@@ -35,7 +31,6 @@ public class TestsDossierBancaire {
 		assertEquals(500,db.get_solde(),0.01);		
 		
 	}
-	
 	@Test
 	public void getsolde() {
 		
