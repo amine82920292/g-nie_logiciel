@@ -11,12 +11,7 @@ import myPackage.DossierBancaire;
 public class TestsDossierBancaire {
 
 	@Before
-	public void setUp() throws Exception {
-		
-		
-		
-		
-		
+	public void setUp() throws Exception {	
 	}
 
 	@After
@@ -43,7 +38,7 @@ public class TestsDossierBancaire {
 
 	}
 	@Test
-	public void test() {
+	public void testremunerer() {
 		DossierBancaire dossier=new DossierBancaire();
 		dossier.deposer(100);
 		assertEquals(100,dossier.get_solde(),0);
