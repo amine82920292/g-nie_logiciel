@@ -44,4 +44,16 @@ public class DossierBancaire {
 	public CompteEpargne get_ce() {
 		return _ce;
 	}
+	
+	//ajout de la méthode retirer
+	public void retirer(double somme) throws Exception{
+		try
+		{
+		_cc._solde-=somme;
+		_soldeDB=_cc._solde+_ce._solde;
+		}
+		catch(Exception e1){			
+			throw e1;
+		}
+	}
 }
