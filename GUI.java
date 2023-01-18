@@ -6,34 +6,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import metier.IMetier;
-
 import javax.swing.JButton;
 
 
 public class GUI  implements ActionListener 
 {
-	//@Autowired
-	//IMetier metier;
-	private Client _c;
+
 	private DossierBancaire m_dossier;
 	private JTextField m_saisie_depot;
 	private JTextField m_saisie_retrait;
 	private JTextField m_display_solde;
-	private JTextField m_display_soldecc;
-	private JTextField m_display_soldece;
 	private JButton m_remunerer;
 	// Constructeur
-    public GUI(Client c)
+    public GUI(DossierBancaire d)
     {
-    	_c=c;
     	//Dossier
-    	m_dossier 			= _c.getdb();
+    	m_dossier 			= d;
     	
     	//Element saisie depot
         m_saisie_depot = new JTextField (20);
@@ -53,21 +42,12 @@ public class GUI  implements ActionListener
         m_display_solde.setEditable(false); //Pour eviter d'ecrire
         m_display_solde.setText(Double.toString(m_dossier.get_solde()));
         
-      //Element affichage soldecc
-        m_display_soldecc = new JTextField (20);
-        m_display_soldecc.setEditable(false); //Pour eviter d'ecrire
-        m_display_soldecc.setText(Double.toString(m_dossier.get_cc().get_solde()));
-        
-      //Element affichage soldecc
-        m_display_soldece = new JTextField (20);
-        m_display_soldece.setEditable(false); //Pour eviter d'ecrire
-        m_display_soldece.setText(Double.toString(m_dossier.get_ce().get_solde()));
         
         //Initialisation de la fenetre generale
         JFrame frame = new JFrame("Editeur dossier bancaire");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Geometrie de repartition des elements graphiques
-        frame.setLayout(new GridLayout(6,2)); //3 lignes and 2 columns
+        frame.setLayout(new GridLayout(4,2)); //3 lignes and 2 columns
         //First line
         frame.getContentPane().add(new JLabel("Depot"));
         frame.getContentPane().add(m_saisie_depot);
@@ -75,12 +55,8 @@ public class GUI  implements ActionListener
         frame.getContentPane().add(m_remunerer);     
         frame.getContentPane().add(new JLabel("Retrait"));
         frame.getContentPane().add(m_saisie_retrait);
-        frame.getContentPane().add(new JLabel("Solde Dossier Bancaire"));
+        frame.getContentPane().add(new JLabel("Solde"));
         frame.getContentPane().add(m_display_solde);
-        frame.getContentPane().add(new JLabel("Solde Compte Courant"));
-        frame.getContentPane().add(m_display_soldecc);
-        frame.getContentPane().add(new JLabel("Solde Compte Epargne"));
-        frame.getContentPane().add(m_display_soldece);
         frame.pack(); //Causes this Window to be sized to fit the preferred size and layouts of its subcomponents.
         frame.setVisible(true); //Shows this Window
         
@@ -90,7 +66,7 @@ public class GUI  implements ActionListener
     {
     	if( e.getSource() == m_saisie_depot )
     	{
-    		float depot_value=Float.parseFloat(m_saisie_depot.getText());
+    		double depot_value=Float.parseFloat(m_saisie_depot.getText());
     		m_dossier.deposer(depot_value);
     		m_saisie_depot.setText("");
     	}
@@ -100,14 +76,13 @@ public class GUI  implements ActionListener
     	}
 		if( e.getSource() == m_saisie_retrait )
     	{
-    		float retrait_value=Float.parseFloat(m_saisie_retrait.getText());
+    		double retrait_value=Float.parseFloat(m_saisie_retrait.getText());
     		try {
 				
-				if(m_dossier.get_cc().get_solde()-retrait_value<0)
+				if(m_dossier._cc.get_solde()-retrait_value<0)
 				{
 					JFrame jFrame = new JFrame();
-					JOptionPane.showMessageDialog(jFrame, " Votre solde de compte courant de "+ m_dossier.get_cc().get_solde() +
-							" euros est insuffisant "+_c.getNom()+" "+_c.getPrenom()+" , vous ne pouvez pas retirer "+retrait_value+" euros");
+					JOptionPane.showMessageDialog(jFrame, "Votre solde est insuffisant");
 				}
 				m_dossier.retirer(retrait_value);
 				
@@ -117,8 +92,6 @@ public class GUI  implements ActionListener
 			}
     		m_saisie_retrait.setText("");
     	}
-    	m_display_solde.setText(Double.toString(m_dossier.get_solde()));  
-    	m_display_soldecc.setText(Double.toString(m_dossier.get_cc().get_solde()));
-    	m_display_soldece.setText(Double.toString(m_dossier.get_ce().get_solde()));
+    	m_display_solde.setText(Double.toString(m_dossier.get_solde()));  	
     }
 }

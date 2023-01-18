@@ -11,10 +11,10 @@ public class DossierBancaire {
 
 		_cc = new CompteCourant();
 		_ce = new CompteEpargne();
-		_soldeDB = 0;
+		_soldeDB = _cc.get_solde()+_ce.get_solde();
 	}
 
-//methode déposer
+//methode dï¿½poser
 	
 	public void deposer(double value) {
 
@@ -31,8 +31,8 @@ public class DossierBancaire {
 	// methode remunurer
 	public void remunerer() {
 		double gain = _ce.remunerer();
-		this.deposer(gain);
-
+		this.get_ce().Deposer(gain);
+		_soldeDB = _cc.get_solde()+_ce.get_solde();
 	}
 
 	// methode pour recuperer les informations du compte courant
@@ -40,20 +40,32 @@ public class DossierBancaire {
 		return _cc;
 	}
 
-	// methode pour recuperer les informations du compte épargne
+	// methode pour recuperer les informations du compte ï¿½pargne
 	public CompteEpargne get_ce() {
 		return _ce;
 	}
 	
-	//ajout de la méthode retirer
-	public void retirer(double somme) throws Exception{
-		try
-		{
-		_cc._solde-=somme;
-		_soldeDB=_cc._solde+_ce._solde;
+	//ajout de la mÃ©thode retirer
+		public void retirer(double somme) throws Exception{
+			try
+			{
+			int s=(int) _cc._solde;
+			s-=somme;
+			if(s>=0) {
+			_cc._solde-=somme;
+			_soldeDB=_cc._solde+_ce._solde;}
+			}
+			catch(Exception e1){	
+				e1.getMessage();
+				System.out.println("Vous n'avez pas assez dans votre compte");
+				throw e1;
+				
+			}
 		}
-		catch(Exception e1){			
-			throw e1;
+		
+		@Override
+		public String toString() {
+			return " Dossier Bancaire [" + " solde compte courant=" + _cc.get_solde() + " euro(s) solde compte Ã©pargne="
+		+ _ce.get_solde() +" euro(s) ]";
 		}
-	}
 }
