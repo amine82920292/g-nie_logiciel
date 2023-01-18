@@ -9,6 +9,6 @@ import config.config;
 @Import({config.class})public class ApplicationService {
 	public static void main(String[] args) {
 		SpringApplication.run(ApplicationService.class, args);
-		
+	 	
 	}	
 }
