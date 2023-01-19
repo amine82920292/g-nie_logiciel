@@ -33,9 +33,9 @@ public class Controller {
 			return new ResponseEntity<>(fc,HttpStatus.OK);
 		}
 		
-		// requete GET  (ex http://localhost:8080/ClientsBySolde?sMin=50&sMax=10000)		
-		@GetMapping("/ClientsBySolde")
-		public ResponseEntity<Client[]> getFilm(@RequestParam(value = "sMin") double sMin,@RequestParam(value = "sMax") double sMax) 
+		// requete GET  (ex http://localhost:8080/ClientsBySoldeDB?sMin=50&sMax=10000)		
+		@GetMapping("/ClientsBySoldeDB")
+		public ResponseEntity<Client[]> getClientsBySolde(@RequestParam(value = "sMin") double sMin,@RequestParam(value = "sMax") double sMax) 
 		{
 			Client[] fc=metier.getClientBySoldeIn(sMin, sMax);
 			return new ResponseEntity<>(fc,HttpStatus.OK);
@@ -44,7 +44,7 @@ public class Controller {
 		// requete POST  (ex http://localhost:8080/Client)
 		// Client en JSON dans le body
 		@PostMapping("/Client")
-		public ResponseEntity<String> addFilm(@RequestBody Client p) 
+		public ResponseEntity<String> addClient(@RequestBody Client p) 
 		{			
 			metier.addClient(p);
 			return new ResponseEntity<>("ok",HttpStatus.OK);		

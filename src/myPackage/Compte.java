@@ -9,5 +9,6 @@ public class Compte {
 	
 	public double get_solde() {return _solde;}
 	
+	public double set_solde(double newsolde) {return _solde=newsolde;}
 	
 }

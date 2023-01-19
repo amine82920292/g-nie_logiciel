@@ -2,14 +2,10 @@ package myPackage;
 
 public class Main {
     public static void main(String[] args) 
-    {
-      /*  DossierBancaire obj=new DossierBancaire();
-        GUI g = new GUI(obj);
-        //System.out.println("Solde: " + obj.get_solde()); */
-    	
-        Client c= new Client("Diouf", "Annastasie",9);
-        GUI g = new GUI(c);
-      
+    {    
+        //System.out.println("Solde: " + obj.get_solde()); */  	
+    	  Client client1= new Client("amine&marguerite","sagi",12);
+          GUI g = new  GUI(client1);   
     }
 
 }
