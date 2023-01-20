@@ -9,19 +9,23 @@ public class Banquier {
 	private int id;
 	private ArrayList<DossierBancaire> dossiersbancaire ;
 	
-	//getters
+	//getters et setters 
+	///////
 	public String get_nom() {
 		return _nom;
 	}
+	//nom
 	public void set_nom(String _nom) {
 		this._nom = _nom;
 	}
+	//prenom
 	public String get_prenom() {
 		return _prenom;
 	}
 	public void set_prenom(String _prenom) {
 		this._prenom = _prenom;
 	}
+	//ID
 	public int getId() {
 		return id;
 	}
